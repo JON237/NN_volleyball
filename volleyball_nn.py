@@ -1,8 +1,9 @@
+"""Train a neural network on volleyball match data using TensorFlow."""
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
-from sklearn.pipeline import make_pipeline
+import tensorflow as tf
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -10,21 +11,36 @@ def load_data(path: str) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
-def train_model(df: pd.DataFrame) -> MLPClassifier:
-    """Train a neural network to predict match results."""
-    X = df.drop('result', axis=1)
-    y = df['result']
+def build_model(input_dim: int) -> tf.keras.Model:
+    """Create the TensorFlow neural network model."""
+    model = tf.keras.Sequential(
+        [
+            tf.keras.layers.InputLayer(input_shape=(input_dim,)),
+            tf.keras.layers.Dense(64, activation="relu"),
+            tf.keras.layers.Dense(32, activation="relu"),
+            tf.keras.layers.Dense(16, activation="relu"),
+            tf.keras.layers.Dense(1, activation="sigmoid"),
+        ]
+    )
+    model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+    return model
+
+
+def train_model(df: pd.DataFrame) -> tf.keras.Model:
+    """Train the TensorFlow model and print its accuracy."""
+    X = df.drop("result", axis=1)
+    y = df["result"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    model = make_pipeline(
-        StandardScaler(),
-        MLPClassifier(hidden_layer_sizes=(32, 16), max_iter=1000, random_state=42)
-    )
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
 
-    model.fit(X_train, y_train)
-    accuracy = model.score(X_test, y_test)
+    model = build_model(X_train_scaled.shape[1])
+    model.fit(X_train_scaled, y_train, epochs=50, batch_size=8, verbose=0)
+    loss, accuracy = model.evaluate(X_test_scaled, y_test, verbose=0)
     print(f"Test accuracy: {accuracy:.2f}")
     return model
 
