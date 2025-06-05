@@ -20,8 +20,18 @@ The training data is expected as a CSV file where each row represents one past m
 Install the dependencies and run `volleyball_nn.py`:
 
 ```bash
-pip install tensorflow scikit-learn pandas
+pip install tensorflow scikit-learn pandas streamlit
 python volleyball_nn.py --data volleyball_matches.csv
 ```
 
 The script splits the data into training and test sets, scales the features and trains a TensorFlow network with layers 64-32-16 using ReLU activations and a sigmoid output. The test accuracy is printed after training.
+
+## Interactive Demo
+
+To experiment with your own inputs, launch the Streamlit application:
+
+```bash
+streamlit run streamlit_app.py --server.headless true
+```
+
+The web interface lets you enter team statistics and returns which team the model expects to win along with the predicted probability.
