@@ -20,8 +20,8 @@ The training data is expected as a CSV file where each row represents one past m
 Install the dependencies and run `volleyball_nn.py`:
 
 ```bash
-pip install scikit-learn pandas
+pip install tensorflow scikit-learn pandas
 python volleyball_nn.py --data volleyball_matches.csv
 ```
 
-The script splits the data into training and test sets, trains a small feed-forward neural network and prints the test accuracy.
+The script splits the data into training and test sets, scales the features and trains a TensorFlow network with layers 64-32-16 using ReLU activations and a sigmoid output. The test accuracy is printed after training.
