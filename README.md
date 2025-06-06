@@ -4,8 +4,10 @@ This repository contains a minimal example of training a neural network to predi
 
 ## Dataset
 
-The training data is expected as a CSV file where each row represents one past match. An example dataset `volleyball_matches.csv` is included. The columns used are:
+The training data is expected as a CSV file where each row represents one past match. An example dataset `volleyball_matches_with_teams.csv` is included. The columns used are:
 
+- `home_team` – name of the home team (14 different teams)
+- `away_team` – name of the away team
 - `home_rank` – rank of the home team
 - `away_rank` – rank of the away team
 - `home_wins_last_10` – wins by the home team in the last 10 matches
@@ -20,10 +22,10 @@ Install the dependencies and run `volleyball_nn.py`:
 
 ```bash
 pip install tensorflow scikit-learn pandas streamlit
-python volleyball_nn.py --data volleyball_matches.csv
+python volleyball_nn.py --data volleyball_matches_with_teams.csv
 ```
 
-The script splits the data into training and test sets, scales the features and trains a TensorFlow network with layers 64-32-16 using ReLU activations and a sigmoid output. The test accuracy is printed after training.
+The script splits the data into training and test sets, encodes the team names through an embedding layer and scales the numeric features. It then trains a TensorFlow network with layers 64-32-16 and prints the test accuracy.
 
 ## Interactive Demo
 
