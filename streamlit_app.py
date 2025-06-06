@@ -80,7 +80,8 @@ def main():
     # Daten laden und Modell beim Start trainieren
     df = load_data("volleyball_matches_with_teams.csv")
     model, scaler, team_to_idx = train_model(df)
-    teams = list(team_to_idx.keys())
+    # Teams alphabetisch sortieren, damit sie leichter auswählbar sind
+    teams = sorted(team_to_idx.keys())
 
     st.header("Team-Statistiken")
 

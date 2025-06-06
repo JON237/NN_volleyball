@@ -4,7 +4,25 @@ This repository contains a minimal example of training a neural network to predi
 
 ## Dataset
 
-The training data is expected as a CSV file where each row represents one past match. An example dataset `volleyball_matches_with_teams.csv` is included. The columns used are:
+The training data is expected as a CSV file where each row represents one past match. An example dataset `volleyball_matches_with_teams.csv` is included with team names from the German Bundesliga:
+
+```
+ASV Dachau
+Baden Volleys SSC Karlsruhe
+BERLIN RECYCLING Volleys
+Energiequelle Netzhoppers KW
+FT 1844 Freiburg
+HELIOS GRIZZLYS Giesen
+SVG Lüneburg
+SWD powervolleys DÜREN
+TSV Haching München
+VC Bitterfeld-Wolfen
+VCO Berlin
+VfB Friedrichshafen
+WWK Volleys Herrsching
+```
+
+The CSV columns used are:
 
 - `home_team` – name of the home team (14 different teams)
 - `away_team` – name of the away team
