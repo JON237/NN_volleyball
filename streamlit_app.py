@@ -80,7 +80,8 @@ def main():
     # Daten laden und Modell beim Start trainieren
     df = load_data("volleyball_matches_with_teams.csv")
     model, scaler, team_to_idx = train_model(df)
-    teams = list(team_to_idx.keys())
+    # Teams alphabetisch sortieren, damit sie leichter auswählbar sind
+    teams = sorted(team_to_idx.keys())
 
     st.header("Team-Statistiken")
 
@@ -131,10 +132,6 @@ def main():
             winner = "Auswärtsteam"
             prob = 1.0 - prob
         st.write(f"**{winner} gewinnt wahrscheinlich mit {prob:.2f} Wahrscheinlichkeit**")
-
-
-if __name__ == "__main__":
-    main()
 
 
 if __name__ == "__main__":
