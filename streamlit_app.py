@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
+import numpy as np
 
 # Datensatz nur einmal laden und zwischenspeichern
 @st.cache_data
@@ -120,8 +121,8 @@ def main():
         ])
         scaled_num = scaler.transform(numeric)
         inputs = [
-            [team_to_idx[home_team]],
-            [team_to_idx[away_team]],
+            np.array([team_to_idx[home_team]]),
+            np.array([team_to_idx[away_team]]),
             scaled_num,
         ]
         prob = float(model.predict(inputs)[0][0])
