@@ -54,4 +54,4 @@ To experiment with your own inputs, launch the Streamlit application:
 streamlit run streamlit_app.py --server.headless true
 ```
 
-The web interface lets you enter team statistics and returns which team the model expects to win along with the predicted probability. statistics and returns which team the model expects to win along with the predicted probability.
+The web interface lets you enter team statistics and returns which team the model expects to win along with the predicted probability.
